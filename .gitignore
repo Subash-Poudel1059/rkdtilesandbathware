@@ -1,0 +1,11 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# If you ever use a code editor like VS Code
+.vscode/
+.idea/
+
+# Potential secret files
+.env
+*.log

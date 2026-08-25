@@ -1,0 +1,699 @@
+/* ==========================================================================
+   Link-in-Bio Landing Page - Modern Glassmorphism Theme
+   ========================================================================== */
+
+/* --- Google Fonts Import --- */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+/* --- CSS Variables & Design Tokens --- */
+:root {
+  /* Brand Colors */
+  --brand-facebook: #1877F2;
+  --brand-tiktok: #000000;
+  --brand-instagram: #E4405F;
+  --brand-whatsapp: #25D366;
+  --brand-viber: #7360f2;
+  --brand-maps: #EA4335;
+  --brand-email: #EA4335;
+  --brand-primary: #6366f1;
+  --brand-primary-hover: #4f46e5;
+
+  /* Glassmorphism Tokens */
+  --glass-bg: rgba(255, 255, 255, 0.65);
+  --glass-bg-hover: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.7);
+  --glass-border-hover: rgba(255, 255, 255, 0.95);
+  --glass-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05), 0 4px 12px -2px rgba(0, 0, 0, 0.03);
+  --glass-shadow-hover: 0 16px 36px -4px rgba(0, 0, 0, 0.1), 0 8px 16px -2px rgba(0, 0, 0, 0.06);
+
+  /* Color Palette */
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --bg-gradient-1: #e0e7ff;
+  --bg-gradient-2: #f3e8ff;
+  --bg-gradient-3: #f1f5f9;
+
+  /* Radius & Transitions */
+  --radius-card: 20px;
+  --radius-btn: 16px;
+  --radius-full: 9999px;
+  --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --- Base & Reset --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: 'Plus Jakarta Sans', 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  color: var(--text-main);
+  background-color: #f8fafc;
+  -webkit-tap-highlight-color: transparent;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow-x: hidden;
+  padding: 24px 16px;
+}
+
+/* --- Dynamic Ambient Animated Background --- */
+.bg-ambient {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  overflow: hidden;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%);
+}
+
+.bg-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.55;
+  animation: floatOrb 18s ease-in-out infinite alternate;
+}
+
+.bg-orb-1 {
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, #c7d2fe 0%, #a5b4fc 100%);
+  top: -60px;
+  left: -40px;
+}
+
+.bg-orb-2 {
+  width: 360px;
+  height: 360px;
+  background: radial-gradient(circle, #fbcfe8 0%, #f472b6 100%);
+  bottom: -80px;
+  right: -50px;
+  animation-delay: -6s;
+}
+
+.bg-orb-3 {
+  width: 280px;
+  height: 280px;
+  background: radial-gradient(circle, #bae6fd 0%, #38bdf8 100%);
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation-delay: -12s;
+}
+
+@keyframes floatOrb {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(30px, 40px) scale(1.08); }
+  100% { transform: translate(-20px, 20px) scale(0.95); }
+}
+
+/* --- Page Container --- */
+.container {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+/* --- Profile Header Section --- */
+.profile-card {
+  width: 100%;
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px) saturate(190%);
+  -webkit-backdrop-filter: blur(20px) saturate(190%);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--glass-shadow);
+  padding: 32px 24px 24px 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  transition: var(--transition-smooth);
+}
+
+.profile-card:hover {
+  box-shadow: var(--glass-shadow-hover);
+}
+
+/* Profile Avatar Container */
+.avatar-wrapper {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.avatar-img {
+  width: 104px;
+  height: 104px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  transition: var(--transition-smooth);
+}
+
+.avatar-wrapper:hover .avatar-img {
+  transform: scale(1.04) rotate(2deg);
+}
+
+/* Online Status Badge */
+.status-badge {
+  position: absolute;
+  bottom: 6px;
+  right: 6px;
+  width: 18px;
+  height: 18px;
+  background-color: #10b981;
+  border: 3px solid #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(16, 185, 129, 0.4);
+}
+
+.status-badge::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #10b981;
+  border-radius: 50%;
+  animation: pulsePing 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+  opacity: 0.75;
+}
+
+@keyframes pulsePing {
+  75%, 100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+/* Profile Info */
+.business-title-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.business-name {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.65rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-main);
+  line-height: 1.25;
+}
+
+.verified-icon {
+  color: #3b82f6;
+  font-size: 1.1rem;
+}
+
+.business-tagline {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  line-height: 1.5;
+  max-width: 320px;
+}
+
+.badge-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.pill-badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(203, 213, 225, 0.6);
+  color: var(--text-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* --- Showroom Featured Card Section --- */
+.showroom-card {
+  width: 100%;
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px) saturate(190%);
+  -webkit-backdrop-filter: blur(20px) saturate(190%);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--glass-shadow);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: var(--transition-smooth);
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.showroom-card:hover {
+  box-shadow: var(--glass-shadow-hover);
+  transform: translateY(-3px);
+  border-color: var(--glass-border-hover);
+}
+
+.showroom-img-wrapper {
+  position: relative;
+  width: 100%;
+  height: 210px;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.showroom-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.showroom-card:hover .showroom-img {
+  transform: scale(1.05);
+}
+
+.showroom-overlay-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(10px);
+  color: #ffffff;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.showroom-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 8px 4px 8px;
+}
+
+.showroom-title {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text-main);
+}
+
+.showroom-subtext {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* --- Links Container (Vertical Stack) --- */
+.links-stack {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Link Cards */
+.link-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 16px 20px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-btn);
+  box-shadow: var(--glass-shadow);
+  text-decoration: none;
+  color: var(--text-main);
+  font-weight: 600;
+  font-size: 1.025rem;
+  transition: var(--transition-smooth);
+  overflow: hidden;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Inner Left Content (Icon + Text) */
+.link-card-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  z-index: 2;
+}
+
+.icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: var(--transition-smooth);
+  flex-shrink: 0;
+}
+
+.link-title {
+  letter-spacing: -0.01em;
+  transition: color var(--transition-fast);
+}
+
+.link-sublabel {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  margin-top: 1px;
+}
+
+.arrow-icon {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  z-index: 2;
+  transition: var(--transition-smooth);
+}
+
+/* Hover Lift Effect & Brand Specific Glows */
+.link-card:hover {
+  transform: translateY(-4px) scale(1.015);
+  background: var(--glass-bg-hover);
+  border-color: var(--glass-border-hover);
+}
+
+.link-card:active {
+  transform: translateY(-1px) scale(0.995);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.link-card:hover .arrow-icon {
+  transform: translateX(4px);
+  color: var(--text-main);
+}
+
+/* Brand Specific Hover Configurations */
+
+/* Facebook */
+.link-card[data-brand="facebook"] .icon-box {
+  color: var(--brand-facebook);
+}
+.link-card[data-brand="facebook"]:hover {
+  box-shadow: 0 12px 28px -6px rgba(24, 119, 242, 0.35);
+  border-color: rgba(24, 119, 242, 0.4);
+}
+.link-card[data-brand="facebook"]:hover .icon-box {
+  background: var(--brand-facebook);
+  color: #ffffff;
+}
+
+/* TikTok */
+.link-card[data-brand="tiktok"] .icon-box {
+  color: var(--brand-tiktok);
+}
+.link-card[data-brand="tiktok"]:hover {
+  box-shadow: 0 12px 28px -6px rgba(0, 0, 0, 0.4), 0 0 15px rgba(254, 44, 85, 0.2);
+  border-color: rgba(0, 0, 0, 0.5);
+}
+.link-card[data-brand="tiktok"]:hover .icon-box {
+  background: var(--brand-tiktok);
+  color: #ffffff;
+}
+
+/* Instagram */
+.link-card[data-brand="instagram"] .icon-box {
+  color: var(--brand-instagram);
+}
+.link-card[data-brand="instagram"]:hover {
+  box-shadow: 0 12px 28px -6px rgba(228, 64, 95, 0.4), 0 0 18px rgba(131, 58, 180, 0.25);
+  border-color: rgba(228, 64, 95, 0.4);
+}
+.link-card[data-brand="instagram"]:hover .icon-box {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  color: #ffffff;
+}
+
+/* Google Maps / Location */
+.link-card[data-brand="maps"] .icon-box {
+  color: var(--brand-maps);
+}
+.link-card[data-brand="maps"]:hover {
+  box-shadow: 0 12px 28px -6px rgba(234, 67, 53, 0.4);
+  border-color: rgba(234, 67, 53, 0.4);
+}
+.link-card[data-brand="maps"]:hover .icon-box {
+  background: var(--brand-maps);
+  color: #ffffff;
+}
+
+/* WhatsApp */
+.link-card[data-brand="whatsapp"] .icon-box {
+  color: var(--brand-whatsapp);
+}
+.link-card[data-brand="whatsapp"]:hover {
+  box-shadow: 0 12px 28px -6px rgba(37, 211, 102, 0.4);
+  border-color: rgba(37, 211, 102, 0.4);
+}
+.link-card[data-brand="whatsapp"]:hover .icon-box {
+  background: var(--brand-whatsapp);
+  color: #ffffff;
+}
+
+/* Viber */
+.link-card[data-brand="viber"] .icon-box {
+  color: var(--brand-viber);
+}
+.link-card[data-brand="viber"]:hover {
+  box-shadow: 0 12px 28px -6px rgba(115, 96, 242, 0.4);
+  border-color: rgba(115, 96, 242, 0.4);
+}
+.link-card[data-brand="viber"]:hover .icon-box {
+  background: var(--brand-viber);
+  color: #ffffff;
+}
+
+/* Email */
+.link-card[data-brand="email"] .icon-box {
+  color: var(--brand-email);
+}
+.link-card[data-brand="email"]:hover {
+  box-shadow: 0 12px 28px -6px rgba(234, 67, 53, 0.35);
+  border-color: rgba(234, 67, 53, 0.4);
+}
+.link-card[data-brand="email"]:hover .icon-box {
+  background: var(--brand-email);
+  color: #ffffff;
+}
+
+/* --- Action Area / Footer --- */
+.action-footer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.copy-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 20px;
+  background: rgba(15, 23, 42, 0.9);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-btn);
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.15);
+  backdrop-filter: blur(10px);
+  transition: var(--transition-smooth);
+}
+
+.copy-btn:hover {
+  background: #000000;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.25);
+}
+
+.copy-btn:active {
+  transform: translateY(0);
+}
+
+.copy-btn i {
+  font-size: 1rem;
+}
+
+.copyright {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.copyright a {
+  color: var(--text-main);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* --- Toast Notification --- */
+.toast {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: rgba(15, 23, 42, 0.92);
+  backdrop-filter: blur(12px);
+  color: #ffffff;
+  padding: 12px 22px;
+  border-radius: var(--radius-full);
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 1000;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.toast.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.toast-icon {
+  color: #10b981;
+  font-size: 1.1rem;
+}
+
+/* --- QR Modal (Bonus Interactive Feature) --- */
+.qr-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--transition-smooth);
+  padding: 20px;
+}
+
+.qr-modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.qr-modal-content {
+  background: #ffffff;
+  padding: 28px;
+  border-radius: var(--radius-card);
+  text-align: center;
+  max-width: 340px;
+  width: 100%;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  transform: scale(0.9);
+  transition: var(--transition-smooth);
+  position: relative;
+}
+
+.qr-modal.active .qr-modal-content {
+  transform: scale(1);
+}
+
+.qr-close-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+/* --- Media Queries for Mobile Responsiveness --- */
+@media (max-width: 480px) {
+  body {
+    padding: 16px 12px;
+  }
+  
+  .profile-card {
+    padding: 24px 18px 20px 18px;
+  }
+
+  .avatar-img {
+    width: 90px;
+    height: 90px;
+  }
+
+  .business-name {
+    font-size: 1.45rem;
+  }
+
+  .link-card {
+    padding: 14px 16px;
+  }
+
+  .icon-box {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+
+  .link-title {
+    font-size: 0.975rem;
+  }
+}
